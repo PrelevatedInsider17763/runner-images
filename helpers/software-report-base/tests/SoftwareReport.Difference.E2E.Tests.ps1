@@ -14,7 +14,7 @@ Describe "Comparer.E2E" {
         $prevTools.AddToolVersionsList("ToolWillBeUpdated3", @("14.0.0", "15.5.1"), "^\d+")
 
         # Next report
-        $nextSoftwareReport = [SoftwareReport]::new("macOS 11")
+        $nextSoftwareReport = [SoftwareReport]::new("Debian")
         $nextSoftwareReport.Root.AddToolVersion("OS Version:", "macOS 11.7.1 (20G817)")
         $nextSoftwareReport.Root.AddToolVersion("Image Version:", "20220922.1")
         $nextInstalledSoftware = $nextSoftwareReport.Root.AddHeader("Installed Software")
@@ -27,7 +27,7 @@ Describe "Comparer.E2E" {
         $comparer = [SoftwareReportDifferenceCalculator]::new($prevSoftwareReport, $nextSoftwareReport)
         $comparer.CompareReports()
         $comparer.GetMarkdownReport() | Should -BeExactly @'
-# :desktop_computer: Actions Runner Image: macOS 11
+# :desktop_computer: Actions Runner Image: Debian
 - OS Version: macOS 11.7.1 (20G817)
 - Image Version: 20220922.1
 
@@ -68,7 +68,7 @@ Describe "Comparer.E2E" {
     
     It "Some tools are updated, added and removed" {
         # Previous report
-        $prevSoftwareReport = [SoftwareReport]::new("macOS 11")
+        $prevSoftwareReport = [SoftwareReport]::new("Debian")
         $prevSoftwareReport.Root.AddToolVersion("OS Version:", "macOS 11.7.1 (20G817)")
         $prevSoftwareReport.Root.AddToolVersion("Image Version:", "20220918.1")
         $prevInstalledSoftware = $prevSoftwareReport.Root.AddHeader("Installed Software")
@@ -88,7 +88,7 @@ Describe "Comparer.E2E" {
         $prevSQLSection.AddNote("First Note")
 
         # Next report
-        $nextSoftwareReport = [SoftwareReport]::new("macOS 11")
+        $nextSoftwareReport = [SoftwareReport]::new("Debian")
         $nextSoftwareReport.Root.AddToolVersion("OS Version:", "macOS 11.7.2 (20G922)")
         $nextSoftwareReport.Root.AddToolVersion("Image Version:", "20220922.0")
         $nextInstalledSoftware = $nextSoftwareReport.Root.AddHeader("Installed Software")
@@ -111,7 +111,7 @@ Describe "Comparer.E2E" {
         $comparer = [SoftwareReportDifferenceCalculator]::new($prevSoftwareReport, $nextSoftwareReport)
         $comparer.CompareReports()
         $comparer.GetMarkdownReport() | Should -BeExactly @'
-# :desktop_computer: Actions Runner Image: macOS 11
+# :desktop_computer: Actions Runner Image: Debian
 - OS Version: macOS 11.7.2 (20G922)
 - Image Version: 20220922.0
 
@@ -182,8 +182,8 @@ Describe "Comparer.E2E" {
         <tr>
             <td rowspan="1"></td>
             <td>OS Version</td>
-            <td>macOS 11.7.1 (20G817)</td>
-            <td>macOS 11.7.2 (20G922)</td>
+            <td>Debian 10</td>
+            <td>Debian 10</td>
         </tr>
         <tr>
             <td rowspan="2">Language and Runtime</td>

@@ -98,7 +98,7 @@ Finally, run the `GenerateResourcesAndImage` function, setting the mandatory arg
 - `SubscriptionId` - your Azure Subscription ID;
 - `ResourceGroupName` - the name of the resource group that will be created within your subscription (e.g., "imagegen-test");
 - `AzureLocation` - the location where resources will be created (e.g., "East US");
-- `ImageType` - the type of image to build (we suggest choosing "UbuntuMinimal" here; other valid options are "Windows2019", "Windows2022", "Ubuntu2004", "Ubuntu2204").
+- `ImageType` - the type of image to build. Valid options include "Windows2019", "Windows2022", "Ubuntu2004", "Ubuntu2204", "Debian10").
 
 This function automatically creates all required Azure resources and initiates the Packer image generation for the selected image type.
 
@@ -257,6 +257,23 @@ The `builders` section contains variables for the `azure-arm` builder used in th
 **Detailed Azure builders documentation can be found in the [packer documentation](https://www.packer.io/docs/builders/azure).**
 
 ## Toolset
+
+## Debian Image Generation
+
+The Debian image generation process follows similar steps as the Ubuntu image generation, but uses the specific Debian Packer template and associated installation scripts. The Packer template for Debian is defined in `images/debian/packer-template.json` and outlines the required configuration and provisioning steps necessary to prepare the Debian image.
+
+The associated installation scripts used during the provisioning are located in `images/debian/scripts/`. These scripts handle the installation of the base tools required for the Debian image to function as a GitHub Actions runner.
+
+To manually generate a Debian image:
+
+1. Ensure you have all prerequisites installed and configured on your build agent as per the [Build Agent Preparation](#build-agent-preparation) section.
+2. Run the `GenerateResourcesAndImage` function with 'Debian10' as the `ImageType`:
+
+```powershell
+GenerateResourcesAndImage -SubscriptionId "<YourSubscriptionId>" -ResourceGroupName "<YourResourceGroupName>" -AzureLocation "<AzureLocation>" -ImageType "Debian10"
+```
+
+This process will create the Debian image within your specified Azure subscription. After the generation, you can follow the steps in the [Generated Machine Deployment](#generated-machine-deployment) section to deploy a virtual machine using the new Debian image.
 
 The configuration for some installed software is located in `toolset.json` files. These files define the list of Ruby, Python, Go versions, the list of PowerShell modules and VS components that will be installed on the image. They can be changed if these tools are not required, to reduce image generation time or image size.
 
