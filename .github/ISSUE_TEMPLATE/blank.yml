@@ -1,2 +1,4 @@
 name: Blank
 description: With nothing.
+body:
+  - type: textarea
