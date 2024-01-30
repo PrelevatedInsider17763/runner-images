@@ -1,0 +1,56 @@
+{
+  "builders": [
+    {
+      "type": "azure-arm",
+      "client_id": "{{user `client_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "subscription_id": "{{user `subscription_id`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+      "managed_image_resource_group_name": "{{user `managed_image_resource_group_name`}}",
+      "managed_image_name": "debian-runner-image",
+      "managed_image_storage_account_type": "Standard_LRS",
+      "os_type": "Linux",
+      "image_publisher": "Debian",
+      "image_offer": "debian-10",
+      "image_sku": "10",
+      "azure_tags": {
+        "dept": "Engineering",
+        "task": "Image deployment"
+      },
+      "location": "{{user `location`}}",
+      "vm_size": "Standard_DS2_v2"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get install -y build-essential",
+        "sudo apt-get install -y git",
+        "sudo apt-get install -y curl",
+        "sudo apt-get install -y wget",
+        "sudo apt-get install -y zip",
+        "sudo apt-get install -y unzip",
+        "sudo apt-get install -y jq",
+        "sudo apt-get clean"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "azure-arm",
+      "image": "debian-runner-image",
+      "location": "{{user `location`}}",
+      "resource_group_name": "{{user `managed_image_resource_group_name`}}"
+    }
+  ],
+  "variables": {
+    "client_id": null,
+    "client_secret": null,
+    "subscription_id": null,
+    "tenant_id": null,
+    "managed_image_resource_group_name": null,
+    "location": null
+  }
+}
