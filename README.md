@@ -28,6 +28,7 @@ To build a VM machine from this repo's source, see the [instructions](docs/creat
 | macOS 11 | `macos-11`| [macOS-11] |
 | Windows Server 2022 | `windows-latest` or `windows-2022` | [windows-2022] |
 | Windows Server 2019 | `windows-2019` | [windows-2019] |
+| Debian | `debian-latest` | [debian-latest] |
 ### Label scheme
 
 - In general the `-latest` label is used for the latest OS image version that is GA
@@ -158,6 +159,12 @@ In general, these are the guidelines we follow when deciding what to pre-install
 - For general questions about using the runner images or writing your Actions workflow, please open requests in the [GitHub Actions Community Forum](https://github.community/c/github-actions/41).
 
 ## FAQs
+
+<details>
+   <summary><b><i>Is there a Debian image available for GitHub Actions and Azure DevOps?</b></i></summary>
+
+Yes, GitHub Actions and Azure DevOps now offer a Debian image. For instructions on how to build and use the Debian image, see the [create-debian-image.md](docs/create-debian-image.md) documentation.
+</details>
 
 <details>
    <summary><b><i>What images are available for GitHub Actions and Azure DevOps?</b></i></summary>
