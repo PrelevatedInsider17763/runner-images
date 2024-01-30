@@ -2,3 +2,7 @@ name: Blank
 description: With nothing.
 body:
   - type: textarea
+    attributes:
+      label: Message
+    validations:
+      required: true
